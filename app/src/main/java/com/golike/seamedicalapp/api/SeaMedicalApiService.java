@@ -1,6 +1,6 @@
 package com.golike.seamedicalapp.api;
 
-import com.golike.seamedicalapp.module.User;
+import com.golike.seamedicalapp.model.User;
 
 import java.util.List;
 

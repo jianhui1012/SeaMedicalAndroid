@@ -1,4 +1,4 @@
-package com.golike.seamedicalapp.module;
+package com.golike.seamedicalapp.model;
 
 import java.io.Serializable;
 
