@@ -14,13 +14,24 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by admin on 2017/4/5.
  */
 public class SeaMedicalApi {
+
     private static SeaMedicalApi seaMedicalApi;
 
-    private static Object lock=new Object();
+    private static Object lock = new Object();
 
-    private SeaMedicalApi(OkHttpClient okHttpClient){
+    private SeaMedicalApi(OkHttpClient okHttpClient) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Const.API_BASE_URL)
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create()) // 添加Rx适配器
+                .addConverterFactory(GsonConverterFactory.create()) // 添加Gson转换器
+                .client(okHttpClient)
+                .build();
+        seaMedicalApi = retrofit.create(SeaMedicalApi.class);
+    }
+
+    private SeaMedicalApi(OkHttpClient okHttpClient,String url) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(url)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create()) // 添加Rx适配器
                 .addConverterFactory(GsonConverterFactory.create()) // 添加Gson转换器
                 .client(okHttpClient)
@@ -32,7 +43,18 @@ public class SeaMedicalApi {
         if (seaMedicalApi == null) {
             synchronized (lock) {
                 if (seaMedicalApi == null) {
-               seaMedicalApi=new SeaMedicalApi(okHttpClient);
+                    seaMedicalApi = new SeaMedicalApi(okHttpClient);
+                }
+            }
+        }
+        return seaMedicalApi;
+    }
+
+    public static SeaMedicalApi getInstance(OkHttpClient okHttpClient,String baseurl) {
+        if (seaMedicalApi == null) {
+            synchronized (lock) {
+                if (seaMedicalApi == null) {
+                    seaMedicalApi = new SeaMedicalApi(okHttpClient,baseurl);
                 }
             }
         }

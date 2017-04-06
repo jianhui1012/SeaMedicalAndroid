@@ -7,9 +7,15 @@ import java.io.Serializable;
  */
 public class User implements Serializable {
 
-    private String uid;
+    public String userId;
 
-    private String username;
+    public String name;
 
-    private String userpwd;
+    public String portraitUri;
+
+    public String token;
+
+    public int code;
+
+
 }

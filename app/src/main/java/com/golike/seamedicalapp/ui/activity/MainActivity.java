@@ -8,20 +8,14 @@ import android.widget.Toast;
 
 import com.golike.seamedicalapp.R;
 
+import io.rong.imkit.RongIM;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Button button=new Button(this);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"button",Toast.LENGTH_LONG).show();
-            }
-        });
 
     }
 }

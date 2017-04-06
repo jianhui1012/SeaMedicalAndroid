@@ -5,8 +5,12 @@ import com.golike.seamedicalapp.model.User;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
+import rx.Observable;
 
 /**
  * 提供海上医疗api接口
@@ -14,8 +18,16 @@ import retrofit2.http.Path;
  */
 public interface SeaMedicalApiService {
 
-    @GET("user/{id}/info")
-    Call<List<User>> listuser(@Path("id") int id);
 
+    /***
+     * 融云用户token获取
+     * @param userId
+     * @param name
+     * @param portraitUri
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("/user/getToken.json")
+    Observable<User> get(@Field("user") String userId,@Field("name") String name,@Field("portraitUri") String portraitUri);
 
 }
