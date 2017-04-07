@@ -19,35 +19,14 @@ public class SeaMedicalApi {
 
     private static Object lock = new Object();
 
-    private SeaMedicalApi(OkHttpClient okHttpClient) {
+    private SeaMedicalApi(OkHttpClient okHttpClient,String baseurl) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Const.API_BASE_URL)
+                .baseUrl(baseurl)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create()) // 添加Rx适配器
                 .addConverterFactory(GsonConverterFactory.create()) // 添加Gson转换器
                 .client(okHttpClient)
                 .build();
         seaMedicalApi = retrofit.create(SeaMedicalApi.class);
-    }
-
-    private SeaMedicalApi(OkHttpClient okHttpClient,String url) {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(url)
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create()) // 添加Rx适配器
-                .addConverterFactory(GsonConverterFactory.create()) // 添加Gson转换器
-                .client(okHttpClient)
-                .build();
-        seaMedicalApi = retrofit.create(SeaMedicalApi.class);
-    }
-
-    public static SeaMedicalApi getInstance(OkHttpClient okHttpClient) {
-        if (seaMedicalApi == null) {
-            synchronized (lock) {
-                if (seaMedicalApi == null) {
-                    seaMedicalApi = new SeaMedicalApi(okHttpClient);
-                }
-            }
-        }
-        return seaMedicalApi;
     }
 
     public static SeaMedicalApi getInstance(OkHttpClient okHttpClient,String baseurl) {

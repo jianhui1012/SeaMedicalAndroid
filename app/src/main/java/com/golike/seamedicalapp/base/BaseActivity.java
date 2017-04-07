@@ -7,6 +7,7 @@ import com.golike.seamedicalapp.SeaMedicalApplication;
 import com.golike.seamedicalapp.component.AppComponent;
 
 /**
+ * Activity的基类
  * Created by admin on 2017/4/6.
  */
 public abstract class BaseActivity extends AppCompatActivity {
@@ -18,4 +19,11 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected abstract void setupActivityComponent(AppComponent appComponent);
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // 监测内存泄露
+        SeaMedicalApplication.getRefWatcher(this).watch(this);
+    }
 }

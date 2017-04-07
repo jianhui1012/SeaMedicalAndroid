@@ -4,8 +4,11 @@ import com.golike.seamedicalapp.api.SeaMedicalApi;
 import com.golike.seamedicalapp.api.support.HeaderInterceptor;
 import com.golike.seamedicalapp.api.support.Logger;
 import com.golike.seamedicalapp.api.support.LoggingInterceptor;
+import com.golike.seamedicalapp.base.Const;
 
 import java.util.concurrent.TimeUnit;
+
+import javax.inject.Named;
 
 import dagger.Module;
 import dagger.Provides;
@@ -16,6 +19,18 @@ import okhttp3.OkHttpClient;
  */
 @Module
 public class SeaMedicalApiModule {
+
+    private final String baseurl;
+
+    public SeaMedicalApiModule(String baseurl){
+       this.baseurl=baseurl;
+    }
+
+    //默认为本应用api接口
+    public SeaMedicalApiModule(){
+        this.baseurl= Const.API_BASE_URL;
+    }
+
 
     @Provides
     public OkHttpClient provideOkHttpClient() {
@@ -33,6 +48,8 @@ public class SeaMedicalApiModule {
 
     @Provides
     protected SeaMedicalApi provideSeaService(OkHttpClient okHttpClient) {
-        return SeaMedicalApi.getInstance(okHttpClient);
+        return SeaMedicalApi.getInstance(okHttpClient,this.baseurl);
     }
+
+
 }
