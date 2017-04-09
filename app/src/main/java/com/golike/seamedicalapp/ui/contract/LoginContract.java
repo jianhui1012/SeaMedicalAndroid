@@ -11,14 +11,14 @@ public interface LoginContract {
 
         void loginSuccess();
 
-        void gettokenCompleted();
+        void gettokenCompleted(String loginToken);
     }
 
     interface Presenter<T> extends BaseContract.BasePresenter<T> {
 
-        void login(String uid, String token, String platform);
+        void login(String uid, String pwd, String platform);
 
-        void gettoken();
+        void gettoken(String uid, String pwd);
     }
 
 }

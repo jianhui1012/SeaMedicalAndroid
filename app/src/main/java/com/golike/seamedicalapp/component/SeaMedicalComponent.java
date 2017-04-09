@@ -15,6 +15,7 @@
  */
 package com.golike.seamedicalapp.component;
 
+import com.golike.seamedicalapp.ui.activity.HomeActivity;
 import com.golike.seamedicalapp.ui.activity.LoginActivity;
 
 import dagger.Component;
@@ -22,4 +23,6 @@ import dagger.Component;
 @Component(dependencies = AppComponent.class)
 public interface SeaMedicalComponent {
     LoginActivity inject(LoginActivity activity);
+
+    HomeActivity inject(HomeActivity activity);
 }

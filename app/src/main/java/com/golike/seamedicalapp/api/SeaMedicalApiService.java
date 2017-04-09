@@ -1,6 +1,8 @@
 package com.golike.seamedicalapp.api;
 
+import com.golike.seamedicalapp.model.ResponseResult;
 import com.golike.seamedicalapp.model.SailorRecord;
+import com.golike.seamedicalapp.model.SeaUser;
 import com.golike.seamedicalapp.model.User;
 
 import java.util.List;
@@ -20,24 +22,14 @@ import rx.Observable;
  */
 public interface SeaMedicalApiService {
 
-    /***
-     * 融云用户token获取
-     * @param userId
-     * @param name
-     * @param portraitUri
-     * @return
-     */
-    @FormUrlEncoded
-    @POST("/user/getToken.json")
-    Observable<User> getToken(@Field("userId") String userId,@Field("name") String name,@Field("portraitUri") String portraitUri);
 
     /***
      *  新增船员的受伤记录
      * @param sailorRecord
      * @return
      */
-    Observable<SailorRecord> addSailorRecord(@Body SailorRecord sailorRecord);
+    Observable<ResponseResult> addSailorRecord(@Body SailorRecord sailorRecord);
 
-
+    Observable<ResponseResult> login(@Body SeaUser seaUser);
 
 }

@@ -17,17 +17,22 @@ package com.golike.seamedicalapp.component;
 
 import android.content.Context;
 
-import com.golike.seamedicalapp.api.SeaMedicalApi;
+import com.golike.seamedicalapp.api.RongYunApiService;
+import com.golike.seamedicalapp.api.SeaMedicalApiService;
 import com.golike.seamedicalapp.module.AppModule;
+import com.golike.seamedicalapp.module.NetModule;
+import com.golike.seamedicalapp.module.RongYunApiModule;
 import com.golike.seamedicalapp.module.SeaMedicalApiModule;
 
 import dagger.Component;
 
-@Component(modules = {AppModule.class, SeaMedicalApiModule.class})
+@Component(modules = {AppModule.class, NetModule.class,SeaMedicalApiModule.class, RongYunApiModule.class})
 public interface AppComponent {
 
     Context getContext();
 
-    SeaMedicalApi getSeaMedicalApi();
+    SeaMedicalApiService getSeaMedicalApi();
+
+    RongYunApiService getRongYunApi();
 
 }

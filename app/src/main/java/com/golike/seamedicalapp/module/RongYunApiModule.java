@@ -2,6 +2,7 @@ package com.golike.seamedicalapp.module;
 
 import com.golike.seamedicalapp.api.RongYunApiService;
 import com.golike.seamedicalapp.api.SeaMedicalApiService;
+import com.golike.seamedicalapp.base.Const;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -17,16 +18,17 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by admin on 2017/4/6.
  */
 @Module
-public class SeaMedicalApiModule {
+public class RongYunApiModule {
 
     private final String baseurl;
 
-    public SeaMedicalApiModule(String baseurl){
+    public RongYunApiModule(String baseurl){
         this.baseurl=baseurl;
     }
 
-    @Provides
-    @Named("seamedical_retrofit")
+
+
+    @Provides  @Named("rongyun_retrofit")
     Retrofit provideRetrofit(OkHttpClient okHttpClient) {
         return new Retrofit.Builder()
                 .baseUrl(baseurl)
@@ -38,8 +40,8 @@ public class SeaMedicalApiModule {
     }
 
     @Provides
-    protected SeaMedicalApiService provideSeaMedicalService(@Named("seamedical_retrofit")Retrofit retrofit) {
-        return retrofit.create(SeaMedicalApiService.class);
+    protected RongYunApiService provideRongYunService(@Named("rongyun_retrofit")  Retrofit retrofit) {
+        return retrofit.create(RongYunApiService.class);
     }
 
 

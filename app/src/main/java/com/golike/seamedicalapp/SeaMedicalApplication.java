@@ -3,9 +3,12 @@ package com.golike.seamedicalapp;
 import android.app.Application;
 import android.content.Context;
 
+import com.golike.seamedicalapp.base.Const;
 import com.golike.seamedicalapp.component.AppComponent;
 import com.golike.seamedicalapp.component.DaggerAppComponent;
 import com.golike.seamedicalapp.module.AppModule;
+import com.golike.seamedicalapp.module.NetModule;
+import com.golike.seamedicalapp.module.RongYunApiModule;
 import com.golike.seamedicalapp.module.SeaMedicalApiModule;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
@@ -32,6 +35,7 @@ public class SeaMedicalApplication extends Application {
     public void onCreate() {
         super.onCreate();
         sinstance = this;
+        initCompoent();
         //配置内存泄露
         refWatcher = LeakCanary.install(this);
         //初始化融云的sdk
@@ -43,9 +47,9 @@ public class SeaMedicalApplication extends Application {
     }
 
     private void initCompoent() {
-        appComponent = DaggerAppComponent.builder()
-                .seaMedicalApiModule(new SeaMedicalApiModule())
-                .appModule(new AppModule(this))
+        appComponent = DaggerAppComponent.builder().appModule(new AppModule(this)).
+                netModule(new NetModule()).rongYunApiModule(new RongYunApiModule(Const.API_RONGYUN_URL))
+                .seaMedicalApiModule(new SeaMedicalApiModule(Const.API_BASE_URL))
                 .build();
     }
 
